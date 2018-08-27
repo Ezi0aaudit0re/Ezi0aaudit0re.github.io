@@ -1,0 +1,13 @@
+User-Agent: Googlebot
+Disallow: /assets/
+Disallow: /send.php
+Disallow: /extras/
+
+User-Agent: bingbot
+Disallow: /assets/
+Disallow: /send.php
+
+sitemap: http://www.codewithaman.com/sitemap.xml
+
+
+
