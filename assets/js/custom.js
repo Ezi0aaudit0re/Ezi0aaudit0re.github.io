@@ -1,19 +1,19 @@
 /*global $*/
 
 $(function () {
-    
+
     "use strict";
-    
+
 /*==================================
     * Author        : Ideas_Factory
     * Template Name : Karizma - Modern vCard / Resume / CV / Portfolio
 ==================================== */
-    
+
 /*=========== TABLE OF CONTENTS ===========
 
     01. Preloader
     02. Isotope Plugin
-    03. Functions 
+    03. Functions
     04. Menu
     05. responsiveSlides plugin
     06. Form Validation
@@ -31,7 +31,7 @@ $(function () {
     var $grid = $('.grid');
 
     $(window).on('load', function () {
-        
+
         /*--------------------------------
             01. Preloader
         ----------------------------------*/
@@ -54,7 +54,7 @@ $(function () {
             });
 
         }
-        
+
     });//--- window(load) ---//
 
     //-- filter items on button click --//
@@ -69,7 +69,7 @@ $(function () {
     });
 
     /*--------------------------------
-        03. Functions 
+        03. Functions
     ----------------------------------*/
     var intro       = '.intro',
         page_right  = '.page-right',
@@ -92,17 +92,17 @@ $(function () {
     }
 
     function check_screen() {
-        
+
         if (Modernizr.mq('(max-width: 991px)')) {
 
             return "mobile_screen";
 
         } else {
-            
+
             return "not_mobile_screen";
 
         }
-        
+
     }
     check_screen();
 
@@ -190,7 +190,7 @@ $(function () {
 
 
     $('#menu a:not(.loading)').on("click", function (event) {
-        
+
         var sec = $(this).attr('href');
         var hash = this.hash;
         event.preventDefault();
@@ -229,7 +229,7 @@ $(function () {
             }
 
             else if ( $('.open-right').length ) {
-                        
+
                 if ( $(sec).hasClass('active_sec') ){ return; }
                 $(menu__a).addClass('loading');
                 scroll__top();
@@ -237,7 +237,7 @@ $(function () {
                 next_num(6);
                 $('.pt-page-current').addClass(out_anim[next_anim]);
                 $(sec).addClass(in_anim[next_anim]).addClass('pt-page-current active_sec').siblings().removeClass('active_sec');
-                sectionCenter();                       
+                sectionCenter();
 
             }else {
 
@@ -263,7 +263,7 @@ $(function () {
 
     /*----------------------------------------
         05. responsiveSlides plugin
-    ------------------------------------------*/ 
+    ------------------------------------------*/
     var project_slider = '.project-slider';
 
     if ( $(project_slider).length ) {
@@ -286,15 +286,15 @@ $(function () {
 
         var error = false,
             name = $('.contact form input[type="text"]');
-        
+
         if (name.val() === "" || name.val() === " ") {
             error = true;
             $(name).addClass("errorForm");
         }
-        
+
         var email_compare = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i,
             email = $('.contact form input[type="email"]');
-        
+
         if (email.val() === "" || email.val() === " ") {
             $(email).addClass("errorForm");
             error = true;
@@ -302,39 +302,45 @@ $(function () {
             $(email).addClass("errorForm");
             error = true;
         }
-        
+
         var msg = $('.contact form textarea');
-        
+
         if (msg.val() === "" || msg.val() === " ") {
             error = true;
             $(msg).addClass("errorForm");
-            
+
         }
-    
+
         if (error === true) {
             return false;
         }
-        
+
         var data_string = $('.contact form').serialize();
-        
-    
+
+
         $.ajax({
             type: "POST",
             url: $('.contact form').attr('action'),
             data: data_string,
-            
+
             success: function (message) {
+                console.log(message)
                 if (message === 'SENDING') {
                     $('.msg_success').fadeIn('slow');
                 } else {
                     $('.msg_error').fadeIn('slow');
                 }
-            }
-            
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Error occured")
+                console.log(errorThrown)
+           }
+
+
         });
-        
+
         return false;
-        
+
     });
 
     /*--------------------------------
@@ -373,7 +379,7 @@ $(function () {
                 enabled: true
             },
             zoom: {
-                enabled: true, 
+                enabled: true,
                 duration: 300,
                 easing: 'ease-in-out',
                 opener: function (openerElement) {
@@ -384,7 +390,7 @@ $(function () {
         });
 
     };
-    // Call the functions 
+    // Call the functions
     if( $(my_img).length ){
 
         magnifPopup();
@@ -440,7 +446,7 @@ $(function () {
     function fitMyText(){
 
         var fit__text = $(".fit__text");
-        
+
         if ( fit__text.length !== 0 ){
 
             fit__text.fitText(1, { maxFontSize: 45 });
@@ -452,13 +458,13 @@ $(function () {
 
     /*--------------------------------
         11. Slick plugin
-    ----------------------------------*/ 
+    ----------------------------------*/
     var owl_slick = '.owl';
     $(owl_slick).slick({
         infinite: false,
         slidesToShow: 2,
         arrows: false,
-        responsive: 
+        responsive:
             [{
               breakpoint: 768,
               settings: {
@@ -506,7 +512,7 @@ $(function () {
 
     /*--------------------------------
         14. Jquery.mb.YTPlayer Plugin
-    ----------------------------------*/ 
+    ----------------------------------*/
     if ($("#bgndVideo").length){
 
         jQuery("#bgndVideo").YTPlayer({
@@ -520,5 +526,3 @@ $(function () {
 
 
 });
-
-
